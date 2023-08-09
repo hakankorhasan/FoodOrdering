@@ -137,6 +137,40 @@
             </objects>
             <point key="canvasLocation" x="-744" y="-50"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="CcO-0P-fYU">
+            <objects>
+                <viewController id="9k7-Rm-e4i" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wqc-DC-hf0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="gMK-ab-X1u"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cXz-wg-wPV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TeQ-YY-6Xg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="970.2290076335878" y="-36.619718309859159"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="v34-ai-FCX">
+            <objects>
+                <navigationController storyboardIdentifier="HomeNC" automaticallyAdjustsScrollViewInsets="NO" id="TtA-Yh-HP6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FnQ-Tr-N71">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9k7-Rm-e4i" kind="relationship" relationship="rootViewController" id="5iQ-dQ-efu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GDU-tg-HlM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="43.511450381679388" y="-36.619718309859159"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
