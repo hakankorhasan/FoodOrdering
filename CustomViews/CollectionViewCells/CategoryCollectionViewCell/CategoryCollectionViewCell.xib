@@ -61,7 +61,7 @@
                 <outlet property="categoryImageView" destination="txx-kT-e5z" id="wUu-AK-4yt"/>
                 <outlet property="categoryTitleLBL" destination="I9c-L4-AV3" id="arf-xe-PCT"/>
             </connections>
-            <point key="canvasLocation" x="82.44274809160305" y="-16.197183098591552"/>
+            <point key="canvasLocation" x="-9.1603053435114496" y="-58.450704225352112"/>
         </collectionViewCell>
     </objects>
     <resources>
