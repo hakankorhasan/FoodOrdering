@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var populerCollectionView: UICollectionView!
     
+    @IBOutlet weak var specialsCollectionView: UICollectionView!
+    
     var categories: [DishCategory] = [
         .init(id: "id1", name: "name 1", image: "https://picsum.photos/100/200"),
         .init(id: "id1", name: "name 2", image: "https://picsum.photos/100/200"),
@@ -30,9 +32,18 @@ class HomeViewController: UIViewController {
         .init(id: "id1", title: "Burak", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 600),
     ]
     
+    var specials: [Dish] = [
+        .init(id: "id1", title: "Ali", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 34),
+        .init(id: "id1", title: "Mehmet", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 340),
+        .init(id: "id1", title: "Serkan", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 150)
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+        
         registerCells()
     }
     
@@ -42,6 +53,8 @@ class HomeViewController: UIViewController {
         categoryCollectionView.register(UINib(nibName: CategoryCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
         
         populerCollectionView.register(UINib(nibName: PopularCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: PopularCollectionViewCell.identifier)
+        
+        specialsCollectionView.register(UINib(nibName: ChefSpecialCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ChefSpecialCollectionViewCell.identifier)
     }
 
 }
@@ -56,6 +69,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return populars.count
         case categoryCollectionView:
             return categories.count
+        case specialsCollectionView:
+            return specials.count
         default: return 0
         }
     
@@ -79,6 +94,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case categoryCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as! CategoryCollectionViewCell
             cell.setup(categroy: categories[indexPath.row])
+            return cell
+        case specialsCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChefSpecialCollectionViewCell.identifier, for: indexPath) as! ChefSpecialCollectionViewCell
+            cell.setup(dish: specials[indexPath.row])
             return cell
         default:
             return UICollectionViewCell()
