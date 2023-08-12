@@ -342,7 +342,41 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TeQ-YY-6Xg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="970.2290076335878" y="-36.619718309859159"/>
+            <point key="canvasLocation" x="868" y="-37"/>
+        </scene>
+        <!--List Dishes View Controller-->
+        <scene sceneID="W1p-mP-crJ">
+            <objects>
+                <viewController storyboardIdentifier="ListDishesViewController" id="agZ-Qz-GZc" customClass="ListDishesViewController" customModule="FoodOrdering" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fjf-7j-iwv">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KjU-eE-Xzw">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="agZ-Qz-GZc" id="AQc-dN-flb"/>
+                                    <outlet property="delegate" destination="agZ-Qz-GZc" id="fnh-wC-Szc"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6bx-Bo-4gH"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="KjU-eE-Xzw" firstAttribute="top" secondItem="Fjf-7j-iwv" secondAttribute="top" id="BtO-HI-TmJ"/>
+                            <constraint firstItem="KjU-eE-Xzw" firstAttribute="leading" secondItem="6bx-Bo-4gH" secondAttribute="leading" id="OYE-kg-wBm"/>
+                            <constraint firstItem="KjU-eE-Xzw" firstAttribute="trailing" secondItem="6bx-Bo-4gH" secondAttribute="trailing" id="Q7X-wx-sXq"/>
+                            <constraint firstAttribute="bottom" secondItem="KjU-eE-Xzw" secondAttribute="bottom" id="oxn-EM-ySw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="KjU-eE-Xzw" id="QCJ-dV-Nlk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SOf-mp-45I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1751.9083969465648" y="-268.3098591549296"/>
         </scene>
         <!--Dish Detail View Controller-->
         <scene sceneID="DAT-sS-31C">
@@ -443,7 +477,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEH-0W-y2r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1722.9007633587785" y="-26.056338028169016"/>
+            <point key="canvasLocation" x="1752" y="444"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="v34-ai-FCX">
