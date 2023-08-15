@@ -41,7 +41,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        let service = NetworkingManager()
+        let request = service.createRequest(route: .temp, method: .post,
+                                            parameters: ["firstName":"Hakan","lastName":"Korhasan"])
+        print("this url: \(request?.url)")
+        print("this body: \(request?.httpBody)")
         
         
         registerCells()
