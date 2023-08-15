@@ -41,10 +41,20 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NetworkingManager.shared.firstRequest()
-        
+        fetchData()
         
         registerCells()
+    }
+    
+    private func fetchData() {
+        NetworkingManager.shared.firstRequest { data in
+            switch data {
+            case .success(let data):
+                print("the decoded data: \(data)")
+            case .failure(let error):
+                print("the error is: \(error.localizedDescription)")
+            }
+        }
     }
     
     //Bu fonksiyonu CategoryCollectionViewCell için açtığımız nib dosyasını tanıtmak için kullanıyoruz
