@@ -14,11 +14,11 @@ class ListDishesViewController: UIViewController {
     var category: DishCategory!
     
     var dishList: [Dish] = [
-        .init(id: "id1", title: "Hakan", description: "Lorem ipsum dolor sit amet", image: "https://picsum.photos/100/200", calories: 34),
-        .init(id: "id1", title: "Birsu", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 340),
-        .init(id: "id1", title: "Ahmet", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 150),
-        .init(id: "id1", title: "Enes", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 180),
-        .init(id: "id1", title: "Burak", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 600),
+        .init(id: "id1", name: "Hakan", description: "Lorem ipsum dolor sit amet", image: "https://picsum.photos/100/200", calories: 34),
+        .init(id: "id1", name: "Birsu", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 340),
+        .init(id: "id1", name: "Ahmet", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 150),
+        .init(id: "id1", name: "Enes", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 180),
+        .init(id: "id1", name: "Burak", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 600),
     ]
     
     override func viewDidLoad() {

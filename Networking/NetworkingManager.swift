@@ -13,8 +13,8 @@ struct NetworkingManager {
     
     private init() {}
     
-    func firstRequest(completion: @escaping (Result<[Dish], Error>) -> Void) {
-        request(route: .temp, method: .get, completion: completion)
+    func fetchAllCategories(completion: @escaping (Result<AllDishes, Error> ) -> Void) {
+        request(route: .fetchAllCategories, method: .get, completion: completion)
     }
     
     private func request<T: Decodable>(route: Route,
@@ -34,7 +34,7 @@ struct NetworkingManager {
             if let data = data {
                 result = .success(data)
                 let responseString = String(data: data, encoding: .utf8) ?? "could not be stringfy our data"
-                print("the response is: \(responseString)")
+              //  print("the response is: \(responseString)")
             } else if let error = error {
                 result = .failure(error)
                 print("the error is manager: \(error.localizedDescription)")

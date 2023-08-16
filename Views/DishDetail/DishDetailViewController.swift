@@ -30,7 +30,7 @@ class DishDetailViewController: UIViewController {
     
     private func populateView() {
         dishImageView.kf.setImage(with: dish.image?.asUrl)
-        titleLabel.text = dish.title
+        titleLabel.text = dish.name
         caloriesLabel.text = dish.formattedCalories
         descriptionLabel.text = dish.description
     }

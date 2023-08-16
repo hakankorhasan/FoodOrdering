@@ -21,7 +21,7 @@ class ChefSpecialCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var caloriesLabel: UILabel!
     
     func setup(dish: Dish) {
-        titleLabel.text = dish.title
+        titleLabel.text = dish.name
         descriptionLabel.text = dish.description
         caloriesLabel.text = dish.formattedCalories
         dishImageView.kf.setImage(with: dish.image?.asUrl)

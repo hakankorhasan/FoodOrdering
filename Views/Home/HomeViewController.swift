@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class HomeViewController: UIViewController {
 
@@ -15,46 +16,43 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var specialsCollectionView: UICollectionView!
     
-    var categories: [DishCategory] = [
-        .init(id: "id1", name: "name 1", image: "https://picsum.photos/100/200"),
-        .init(id: "id1", name: "name 2", image: "https://picsum.photos/100/200"),
-        .init(id: "id1", name: "name 3", image: "https://picsum.photos/100/200"),
-        .init(id: "id1", name: "name 4", image: "https://picsum.photos/100/200"),
-        .init(id: "id1", name: "name 5", image: "https://picsum.photos/100/200"),
-        .init(id: "id1", name: "name 6", image: "https://picsum.photos/100/200"),
-    ]
+    var categories: [DishCategory] = []
     
-    var populars: [Dish] = [
-        .init(id: "id1", title: "Hakan", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ", image: "https://picsum.photos/100/200", calories: 34),
-        .init(id: "id1", title: "Birsu", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 340),
-        .init(id: "id1", title: "Ahmet", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 150),
-        .init(id: "id1", title: "Enes", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 180),
-        .init(id: "id1", title: "Burak", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 600),
-    ]
+    var populars: [Dish] = []
     
-    var specials: [Dish] = [
-        .init(id: "id1", title: "Ali", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 34),
-        .init(id: "id1", title: "Mehmet", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 340),
-        .init(id: "id1", title: "Serkan", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 150)
-    ]
+    var specials: [Dish] = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchData()
-        
         registerCells()
-    }
-    
-    private func fetchData() {
-        NetworkingManager.shared.firstRequest { data in
-            switch data {
-            case .success(let data):
-                print("the decoded data: \(data)")
+        let progressHud = JGProgressHUD()
+        progressHud.textLabel.text = "Loading..."
+        progressHud.show(in: self.view)
+        
+        
+        NetworkingManager.shared.fetchAllCategories { [weak self] (result) in
+            switch result {
+            case .success(let allDishes):
+                progressHud.dismiss()
+                print("successfull")
+                
+                self?.categories = allDishes.categories ?? []
+                self?.populars = allDishes.populars ?? []
+                self?.specials = allDishes.specials ?? []
+                
+                self?.categoryCollectionView.reloadData()
+                self?.populerCollectionView.reloadData()
+                self?.specialsCollectionView.reloadData()
+                
             case .failure(let error):
-                print("the error is: \(error.localizedDescription)")
+                progressHud.textLabel.text = error.localizedDescription
+                print("home error is: \(error.localizedDescription)")
             }
         }
+        
     }
     
     //Bu fonksiyonu CategoryCollectionViewCell için açtığımız nib dosyasını tanıtmak için kullanıyoruz
