@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
         registerCells()
         let progressHud = JGProgressHUD()
         progressHud.textLabel.text = "Loading..."
-        progressHud.show(in: self.view)
+        progressHud.show(in: populerCollectionView)
         
         
         NetworkingManager.shared.fetchAllCategories { [weak self] (result) in
