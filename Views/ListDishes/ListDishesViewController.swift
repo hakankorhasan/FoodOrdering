@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class ListDishesViewController: UIViewController {
 
@@ -13,18 +14,26 @@ class ListDishesViewController: UIViewController {
     
     var category: DishCategory!
     
-    var dishList: [Dish] = [
-        .init(id: "id1", name: "Hakan", description: "Lorem ipsum dolor sit amet", image: "https://picsum.photos/100/200", calories: 34),
-        .init(id: "id1", name: "Birsu", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 340),
-        .init(id: "id1", name: "Ahmet", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 150),
-        .init(id: "id1", name: "Enes", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 180),
-        .init(id: "id1", name: "Burak", description: "Bursanın en güzel, gözde yemeklerin mekanı...", image: "https://picsum.photos/100/200", calories: 600),
-    ]
+    var dishList: [Dish] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = category.name
+        ProgressHUD.show()
+        
+        NetworkingManager.shared.fetchCategoryDishes(categoryId: category.id ?? "") { [weak self] (result) in
+            
+            switch result {
+            case .success(let data):
+                ProgressHUD.dismiss()
+                self?.dishList = data
+                self?.tableView.reloadData()
+            case .failure(let error):
+                ProgressHUD.showFailed("\(error.localizedDescription)")
+            }
+        }
+        
         registerCells()
     }
     
@@ -50,8 +59,8 @@ extension ListDishesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = DishDetailViewController.instantiate()
         controller.dish = dishList[indexPath.row]
-      //  controller.modalPresentationStyle = .fullScreen
-      //  controller.modalTransitionStyle = .coverVertical
-        navigationController?.present(controller, animated: true)
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .flipHorizontal
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

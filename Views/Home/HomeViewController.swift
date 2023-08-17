@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import JGProgressHUD
+import ProgressHUD
 
 class HomeViewController: UIViewController {
 
@@ -28,15 +28,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         registerCells()
-        let progressHud = JGProgressHUD()
-        progressHud.textLabel.text = "Loading..."
-        progressHud.show(in: populerCollectionView)
+        //let progressHud = JGProgressHUD()
+        //progressHud.textLabel.text = "Loading..."
+        //progressHud.show(in: populerCollectionView)
         
-        
+        ProgressHUD.show("Loading...")
         NetworkingManager.shared.fetchAllCategories { [weak self] (result) in
             switch result {
             case .success(let allDishes):
-                progressHud.dismiss()
+          //      progressHud.dismiss()
+                ProgressHUD.dismiss()
                 print("successfull")
                 
                 self?.categories = allDishes.categories ?? []
@@ -48,7 +49,8 @@ class HomeViewController: UIViewController {
                 self?.specialsCollectionView.reloadData()
                 
             case .failure(let error):
-                progressHud.textLabel.text = error.localizedDescription
+                //progressHud.textLabel.text = error.localizedDescription
+                ProgressHUD.show("\(error.localizedDescription)")
                 print("home error is: \(error.localizedDescription)")
             }
         }
