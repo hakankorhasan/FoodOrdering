@@ -6,21 +6,38 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class ListOrdersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var orders: [Order] = [
-        .init(id: "id", name: "hakan", dish: .init(id: "id1", name: "Hakan", description: "Lorem ipsum dolor sit amet", image: "https://picsum.photos/100/200", calories: 34)),
-        .init(id: "id", name: "birsu", dish: .init(id: "id1", name: "birsu", description: "Lorem ipsum dolor sit amet", image: "https://picsum.photos/100/200", calories: 34)),
-        .init(id: "id", name: "birsu", dish: .init(id: "id1", name: "birsu", description: "Lorem ipsum dolor sit amet", image: "https://picsum.photos/100/200", calories: 34)),
-    ]
+    var orders: [Order] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "My Orders"
+        ProgressHUD.show()
         registerCells()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchOrders()
+    }
+    
+    private func fetchOrders() {
+        NetworkingManager.shared.fetchAllOrders { (result) in
+            switch result {
+            case .success(let orders):
+                ProgressHUD.dismiss()
+                self.orders = orders
+                self.tableView.reloadData()
+            case .failure(let error):
+                ProgressHUD.showFailed("\(error.localizedDescription)")
+            }
+        }
+        
     }
     
     private func registerCells() {
@@ -44,7 +61,9 @@ extension ListOrdersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = DishDetailViewController.instantiate()
         controller.dish = orders[indexPath.row].dish
-        present(controller, animated: true)
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .flipHorizontal
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

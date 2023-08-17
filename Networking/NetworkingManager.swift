@@ -28,6 +28,10 @@ struct NetworkingManager {
         request(route: .fetchCategoryDishes(categoryId), method: .get, completion: completion)
     }
     
+    func fetchAllOrders(completion: @escaping(Result<[Order], Error>) -> Void) {
+        request(route: .fetchOrders, method: .get, completion: completion)
+    }
+    
     private func request<T: Decodable>(route: Route,
                                      method: Method,
                                      parameters: [String: Any]? = nil,

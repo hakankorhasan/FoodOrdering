@@ -27,12 +27,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ProgressHUD.show()
         registerCells()
-        //let progressHud = JGProgressHUD()
-        //progressHud.textLabel.text = "Loading..."
-        //progressHud.show(in: populerCollectionView)
-        
-        ProgressHUD.show("Loading...")
+        fetchCategories()
+    }
+    
+    private func fetchCategories() {
         NetworkingManager.shared.fetchAllCategories { [weak self] (result) in
             switch result {
             case .success(let allDishes):
@@ -54,7 +54,6 @@ class HomeViewController: UIViewController {
                 print("home error is: \(error.localizedDescription)")
             }
         }
-        
     }
     
     //Bu fonksiyonu CategoryCollectionViewCell için açtığımız nib dosyasını tanıtmak için kullanıyoruz
